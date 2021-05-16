@@ -1,0 +1,93 @@
+################### Monitoring system main engine ############################
+#                                                                            #
+#     Author : Manouchehr Rasouli                                            #
+#                                                                            #
+#     The configuration file contains the information that will needed to    #
+#     service to authenticate over message broker system, and how to connect #
+#     into this broker.                                                      #
+##############################################################################
+
+monitor_engine.property:
+  time_region: '+0000'
+  location: zanjan
+  host: 127.0.0.1
+  jtw_secret_key: monit_rest_api
+  jwt_expire_delta: 3600 # 1 hour
+
+monitor_engine.scheduler:
+  thread_pool_executor: 20
+  process_pool_executor: 5
+
+monitor_engine.message_server:
+  host: 192.168.220.130
+  port: 61613
+  user_name: admin
+  password: admin
+  id: monit_engine
+  # Change for each check point that added to system
+  subscription:
+    - /queue/monit_engine_registry # registry queue for check points
+    - /queue/monit_engine_result  # result queue for tests on urls
+
+# temporarily mail service
+mail_service.mail_host:
+  email_host:
+    - smtp.gmail.com
+  email_user_name: uptime456@gmail.com
+  email_host_password: 123zxc!@#
+  email_port: 465
+
+monitor_engine.starter_kit:
+  sleep_time_slot: 15
+
+monitor_engine.message_handler:
+  sleep_time_slot: 15
+  resum_time_slot: 0
+
+monitor_engine.mail_handling_service:
+  sleep_time_slot: 15
+  resum_time_slot: 0 # second
+  cache_clear_time: 4 # hour
+
+monitor_engine.send_service:
+  sleep_time_slot: 5
+  resum_time_slot: 0
+
+monitor_engine.financial_service:
+  sleep_time_slot: 3600 # 1 day
+
+monitor_engine.data_base:
+  database_host: 192.168.220.130
+  database_port: 27017
+  maximum_pool_size: 50
+  wait_queue_time_out: 100 # ms
+  database_name: monit_engine
+  result_collection: result
+  check_point_collection: check_point
+  url_collection: url
+  user_collection: user
+  finance_collection: finance
+
+monitor_engine.email_service_queue: /queue/email_service
+
+monitor_engine.restful_interface:
+  url_register: /monitor_engine/url/register
+  url_delete: /monitor_engine/url/delete
+  user_registry: /monitor_engine/user/register
+  check_point: /monitor_engine/check_point/info
+  url_for: /monitor_engine/url
+  result_for: /monitor_engine/url/result
+  user_authentication: /monitor_engine/user/authentication
+  confirm_user: /monitor_engine/user/confirm
+  remove_url: /monitor_engine/url/remove
+
+schema:
+  user_register_schema: ./schema/schema/user_register_schema
+  user_register_confirm_schema: ./schema/schema/user_register_confirm_schema
+  user_authentication_schema: ./schema/schema/user_authentication_schema
+  url_register_schema: ./schema/schema/url_register_schema
+  url_fetch_schema: ./schema/schema/url_fetch_schema
+  url_delete_schema: ./schema/schema/url_delete_schema
+  checkpoint_register_schema: ./schema/schema/check_point_register_schema
+
+options_file: ./finance_config.yml

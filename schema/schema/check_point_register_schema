@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "queue": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "time": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "queue",
+    "time",
+    "location",
+    "host"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "user_name": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "email_address": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_name",
+    "password",
+    "email_address"
+  ]
+}
